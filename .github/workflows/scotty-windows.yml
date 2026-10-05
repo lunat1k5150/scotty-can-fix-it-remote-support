@@ -1,0 +1,28 @@
+name: Scotty Windows build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+        with:
+          submodules: recursive
+      - name: Install LLVM
+        uses: KyleMayes/install-llvm-action@ebc0426251bc40c7cd31162802432c68818ab8f0
+        with:
+          version: '15.0.7'
+          directory: 'C:\Program Files\LLVM'
+      - name: Build unsigned branded Windows client
+        shell: pwsh
+        run: ./scotty/build-windows.ps1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: scotty-windows-unsigned
+          path: scotty-dist/*
+          if-no-files-found: error
+          retention-days: 30
+
