@@ -47,7 +47,7 @@ Pop-Location
 $releaseRoot = "$sourceRoot\flutter\build\windows\x64\runner\Release"
 Copy-Item 'target\release\dylib_virtual_display.dll' $releaseRoot
 Rename-Item "$releaseRoot\rustdesk.exe" 'scotty can fix it.exe'
-Copy-Item LICENSE $releaseRoot
+Copy-Item LICENCE $releaseRoot
 Copy-Item 'scotty\CUSTOMER-README.txt' "$releaseRoot\READ-ME.txt"
 # Independent packaging avoids incompatible toolchains in the upstream workspace.
 $packRoot = "$buildRoot\portable-packager"
